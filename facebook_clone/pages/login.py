@@ -2,7 +2,7 @@
 
 import reflex as rx
 
-from ..components.common import BRAND, FB_BLUE, PAGE_BG, TEXT_MUTED
+from ..components.common import BRAND, BRAND_COLOR, PAGE_BG, TEXT_MUTED
 from ..state import AuthState
 
 
@@ -16,17 +16,10 @@ def error_callout() -> rx.Component:
 def signup_dialog() -> rx.Component:
     return rx.dialog.root(
         rx.dialog.trigger(
-            rx.button(
-                "Create new account",
-                color_scheme="green",
-                size="3",
-                weight="bold",
-                padding_x="16px",
-            ),
+            rx.button("Create an account", variant="ghost", size="2"),
         ),
         rx.dialog.content(
-            rx.dialog.title("Sign Up", size="7", margin_bottom="0"),
-            rx.dialog.description("It's quick and easy.", color=TEXT_MUTED),
+            rx.dialog.title("Create an account", size="6", margin_bottom="0"),
             rx.separator(margin_y="12px"),
             rx.form(
                 rx.vstack(
@@ -44,7 +37,7 @@ def signup_dialog() -> rx.Component:
                         width="100%",
                     ),
                     rx.text(
-                        "By clicking Sign Up, you agree to be friends with everyone. Just kidding.",
+                        f"Join {BRAND} to share posts and photos with your friends.",
                         size="1",
                         color=TEXT_MUTED,
                     ),
@@ -53,10 +46,8 @@ def signup_dialog() -> rx.Component:
                         rx.button(
                             "Sign Up",
                             type="submit",
-                            color_scheme="green",
                             size="3",
-                            width="200px",
-                            weight="bold",
+                            width="100%",
                         ),
                         width="100%",
                     ),
@@ -71,29 +62,22 @@ def signup_dialog() -> rx.Component:
 
 def login_page() -> rx.Component:
     return rx.center(
-        rx.flex(
+        rx.vstack(
             rx.vstack(
-                rx.heading(
-                    BRAND,
-                    size="9",
-                    color=FB_BLUE,
-                    weight="bold",
-                    letter_spacing="-2px",
-                    font_size=["44px", "56px", "60px"],
-                ),
+                rx.image(src="/logo.svg", alt=BRAND, width="64px", height="64px"),
+                rx.heading(BRAND, size="8", color=BRAND_COLOR, weight="bold"),
                 rx.text(
-                    f"Connect with friends and the world around you on {BRAND}.",
-                    size="6",
-                    font_size=["20px", "24px", "28px"],
-                    line_height="1.3",
+                    "Share moments with the people you care about.",
+                    size="4",
+                    color=TEXT_MUTED,
+                    text_align="center",
                 ),
-                max_width="500px",
-                align=rx.breakpoints(initial="center", md="start"),
-                text_align=["center", "center", "left"],
+                align="center",
                 spacing="2",
             ),
-            rx.vstack(
-                rx.box(
+            rx.box(
+                rx.vstack(
+                    rx.heading("Log in", size="5"),
                     rx.form(
                         rx.vstack(
                             rx.input(
@@ -112,39 +96,38 @@ def login_page() -> rx.Component:
                                 width="100%",
                             ),
                             error_callout(),
-                            rx.button("Log In", type="submit", size="4", width="100%", weight="bold"),
+                            rx.button("Log in", type="submit", size="3", width="100%"),
                             spacing="3",
                         ),
                         on_submit=AuthState.login,
+                        width="100%",
                     ),
-                    rx.center(
-                        rx.link("Forgotten password?", href="#", size="2"),
-                        padding_y="12px",
+                    rx.hstack(
+                        rx.text("New here?", size="2", color=TEXT_MUTED),
+                        signup_dialog(),
+                        align="center",
+                        justify="center",
+                        width="100%",
                     ),
-                    rx.separator(),
-                    rx.center(signup_dialog(), padding_top="20px"),
-                    background="white",
-                    border_radius="8px",
-                    box_shadow="0 2px 4px rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.1)",
-                    padding="16px",
-                    width=["100%", "396px"],
+                    spacing="4",
                 ),
-                rx.text(
-                    rx.text.strong("Demo login: "),
-                    "mark@example.com / password",
-                    size="2",
-                    color=TEXT_MUTED,
-                ),
-                align="center",
-                spacing="4",
+                background="white",
+                border_radius="16px",
+                border="1px solid #E4E2EE",
+                padding="24px",
+                width="100%",
             ),
-            direction=rx.breakpoints(initial="column", md="row"),
+            rx.text(
+                rx.text.strong("Demo account: "),
+                "amina@example.com / password",
+                size="2",
+                color=TEXT_MUTED,
+            ),
             align="center",
-            justify="center",
-            gap=["32px", "32px", "80px"],
-            padding="20px",
-            max_width="1000px",
+            spacing="5",
             width="100%",
+            max_width="380px",
+            padding="24px 16px",
         ),
         background=PAGE_BG,
         min_height="100vh",

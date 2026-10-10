@@ -11,7 +11,7 @@ config = rx.Config(
     plugins=[
         rx.plugins.SitemapPlugin(),
         rx.plugins.RadixThemesPlugin(
-            theme=rx.theme(appearance="light", accent_color="blue", radius="medium"),
+            theme=rx.theme(appearance="light", accent_color="violet", radius="medium"),
         ),
     ],
     **({"api_url": api_url} if api_url else {}),

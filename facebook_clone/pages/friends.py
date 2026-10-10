@@ -2,7 +2,7 @@
 
 import reflex as rx
 
-from ..components.common import CARD_STYLE, TEXT_MUTED, profile_link, section_title
+from ..components.common import BRAND_COLOR, CARD_STYLE, TEXT_MUTED, profile_link, section_title
 from ..components.layout import app_layout
 from ..state import FriendsState, UserCard
 
@@ -19,7 +19,7 @@ def person_card(user: UserCard, *buttons: rx.Component) -> rx.Component:
                 ),
                 aspect_ratio="1",
                 width="100%",
-                background="#1877F2",
+                background=BRAND_COLOR,
             ),
             width="100%",
         ),

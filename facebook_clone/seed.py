@@ -15,26 +15,26 @@ from .state import hash_password
 DEMO_PASSWORD = "password"
 
 USERS = [
-    ("Mark", "Zuckerberg", "mark@example.com", "Menlo Park", "Building things. Connecting people."),
-    ("Priscilla", "Chan", "priscilla@example.com", "Palo Alto", "Pediatrician & philanthropist."),
-    ("Sheryl", "Sandberg", "sheryl@example.com", "Menlo Park", "Lean in."),
-    ("Eduardo", "Saverin", "eduardo@example.com", "Singapore", "Investor. Co-founder."),
-    ("Dustin", "Moskovitz", "dustin@example.com", "San Francisco", "Asana. Good Ventures."),
-    ("Chris", "Hughes", "chris@example.com", "New York", "Writer and economist."),
-    ("Ada", "Lovelace", "ada@example.com", "London", "First programmer. Big fan of engines."),
-    ("Alan", "Turing", "alan@example.com", "Manchester", "Can machines think?"),
+    ("Amina", "Haddad", "amina@example.com", "Algiers", "Coffee, code and long walks."),
+    ("Youssef", "Benali", "youssef@example.com", "Oran", "Photographer on weekends."),
+    ("Lina", "Mansour", "lina@example.com", "Constantine", "Teacher. Book lover."),
+    ("Karim", "Saidi", "karim@example.com", "Annaba", "Football and family."),
+    ("Sara", "Bouzid", "sara@example.com", "Tlemcen", "Designer who loves colors."),
+    ("Omar", "Khelifi", "omar@example.com", "Setif", "Always learning something new."),
+    ("Nour", "Amrani", "nour@example.com", "Bejaia", "Sea, sun and good books."),
+    ("Rami", "Toumi", "rami@example.com", "Blida", "Chess player and tea fan."),
 ]
 
 # (author index, content, image, hours ago)
 POSTS = [
     (0, "Welcome to sudfa+! Built entirely in Python with Reflex. 🚀", "", 1),
     (1, "Beautiful morning hike with the family 🌄", "/seed/hike.svg", 3),
-    (6, "Reminder: the Analytical Engine might act upon other things besides number. 🤔", "", 5),
-    (2, "Proud of the team today. Keep leaning in!", "/seed/team.svg", 9),
-    (7, "Proposed a little game today — let's call it the imitation game.", "", 20),
+    (6, "Finished a great book today. Any recommendations for the next one? 📚", "", 5),
+    (2, "My students did an amazing job on their project today!", "/seed/team.svg", 9),
+    (7, "Who's up for a game of chess this weekend? ♟️", "", 20),
     (4, "Working from a coffee shop with a view ☕", "/seed/coffee.svg", 30),
-    (3, "Throwback to the dorm room days.", "/seed/dorm.svg", 52),
-    (5, "New essay out this week — would love your thoughts.", "", 75),
+    (3, "Evening view from the balcony.", "/seed/dorm.svg", 52),
+    (5, "Started learning Python this week. Loving it so far!", "", 75),
 ]
 
 # Pairs of user indexes that are friends.
@@ -44,10 +44,10 @@ PENDING = [(5, 0), (7, 0)]
 
 COMMENTS = [
     (0, 1, "So proud of you! ❤️"),
-    (0, 4, "Nice — does it scale?"),
+    (0, 4, "Looks great, congrats!"),
     (1, 0, "Gorgeous view!"),
-    (2, 7, "Agreed. Machines that can follow any rule, in principle."),
-    (4, 6, "I'd like to play."),
+    (2, 7, "Try a mystery novel next!"),
+    (4, 6, "I'm in! Saturday?"),
 ]
 
 LIKES = [(0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 2), (2, 7), (3, 0), (4, 6), (5, 0)]
@@ -123,4 +123,4 @@ if __name__ == "__main__":
     if "--reset" in sys.argv:
         SQLModel.metadata.drop_all(engine)
     init_db()
-    print("Database ready. Demo login: mark@example.com / password")
+    print("Database ready. Demo login: amina@example.com / password")
