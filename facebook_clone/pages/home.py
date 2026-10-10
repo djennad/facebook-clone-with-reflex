@@ -2,7 +2,7 @@
 
 import reflex as rx
 
-from ..components.common import TEXT_MUTED, profile_link, sidebar_item, user_avatar
+from ..components.common import BRAND, TEXT_MUTED, profile_link, sidebar_item, user_avatar
 from ..components.layout import app_layout
 from ..components.post import composer, post_list
 from ..state import AuthState, FriendsState, HomeState, UserCard
@@ -37,7 +37,7 @@ def left_sidebar() -> rx.Component:
         sidebar_item("circle-user-round", "Your profile", f"/profile/{AuthState.user_id}"),
         rx.separator(margin_y="8px"),
         rx.text(
-            "Privacy · Terms · Advertising · Cookies · Meta © 2026 (just a clone!)",
+            f"Privacy · Terms · Advertising · Cookies · {BRAND} © 2026",
             size="1",
             color=TEXT_MUTED,
             padding_x="8px",

@@ -1,4 +1,4 @@
-"""Database models for the Facebook clone."""
+"""Database models for sudfa+."""
 
 import os
 from datetime import datetime, timezone

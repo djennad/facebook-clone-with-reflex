@@ -1,6 +1,6 @@
-# Facebook clone with Reflex
+# sudfa+
 
-A Facebook-style social network written entirely in Python with [Reflex](https://reflex.dev) and SQLModel (SQLite by default).
+A Facebook-style social network called **sudfa+**, written entirely in Python with [Reflex](https://reflex.dev) and SQLModel (SQLite by default).
 
 ## Features
 
