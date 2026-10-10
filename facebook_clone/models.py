@@ -7,9 +7,13 @@ import sqlmodel
 from sqlmodel import Field, SQLModel, Session, create_engine
 
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///facebook.db")
+# Some hosts hand out "postgres://" URLs, which SQLAlchemy doesn't accept.
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = "postgresql://" + DATABASE_URL.removeprefix("postgres://")
 engine = create_engine(
     DATABASE_URL,
     connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {},
+    pool_pre_ping=True,
 )
 
 

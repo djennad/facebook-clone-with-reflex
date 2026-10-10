@@ -31,10 +31,25 @@ python -m facebook_clone.seed --reset
 
 Set `DATABASE_URL` to use another database, for example Postgres.
 
+## Deploy to Render
+
+The repo includes a `Dockerfile` and a `render.yaml` Blueprint that creates the web service and a free Postgres database.
+
+1. In the [Render dashboard](https://dashboard.render.com), choose **New → Blueprint** and select this repository.
+2. Click **Apply**. The first deploy takes a few minutes; the app is then live at `https://<service-name>.onrender.com`.
+
+The app reads `RENDER_EXTERNAL_URL`, which Render sets automatically, so the browser connects to the right address. On any other host, set `API_URL` to the site's public URL.
+
+Notes:
+- Free web services sleep after 15 minutes without traffic, so the next visit takes about a minute to wake up.
+- Render deletes free Postgres databases 30 days after creation unless you upgrade them.
+- Uploaded photos are stored on the service's disk, which is wiped on every deploy or restart. Attach a Render disk at `/app/uploaded_files` (paid plans) to keep them.
+
 ## Project layout
 
 ```
-rxconfig.py                  Reflex config (app name, theme)
+rxconfig.py                  Reflex config (app name, theme, public URL)
+Dockerfile, render.yaml      Production container and Render Blueprint
 facebook_clone/
   facebook_clone.py          App and page routes
   models.py                  SQLModel tables + engine

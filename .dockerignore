@@ -1,0 +1,9 @@
+.git
+.web
+.states
+.venv
+venv
+__pycache__
+*.py[cod]
+*.db
+uploaded_files

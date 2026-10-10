@@ -1,0 +1,16 @@
+# Render Blueprint: in the Render dashboard choose New > Blueprint and pick this repo.
+services:
+  - type: web
+    name: facebook-clone
+    runtime: docker
+    plan: free
+    healthCheckPath: /ping
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: facebook-clone-db
+          property: connectionString
+
+databases:
+  - name: facebook-clone-db
+    plan: free
