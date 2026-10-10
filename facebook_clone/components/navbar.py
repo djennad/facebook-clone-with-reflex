@@ -3,19 +3,12 @@
 import reflex as rx
 
 from ..state import AuthState, SearchState
-from .common import FB_BLUE, TEXT_MUTED, user_avatar
+from .common import BRAND, FB_BLUE, TEXT_MUTED, user_avatar
 
 
 def logo() -> rx.Component:
     return rx.link(
-        rx.center(
-            rx.text("f", size="8", weight="bold", color="white", line_height="1", margin_top="8px"),
-            width="40px",
-            height="40px",
-            border_radius="50%",
-            background=FB_BLUE,
-            overflow="hidden",
-        ),
+        rx.image(src="/logo.svg", alt=BRAND, width="40px", height="40px"),
         href="/",
         underline="none",
     )
@@ -26,7 +19,7 @@ def search_box() -> rx.Component:
         rx.input(
             rx.input.slot(rx.icon("search", size=16, color=TEXT_MUTED)),
             name="q",
-            placeholder="Search Facebook",
+            placeholder=f"Search {BRAND}",
             radius="full",
             size="3",
             variant="soft",

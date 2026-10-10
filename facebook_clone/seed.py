@@ -27,7 +27,7 @@ USERS = [
 
 # (author index, content, image, hours ago)
 POSTS = [
-    (0, "Just shipped a brand new Facebook clone built entirely in Python with Reflex! 🚀", "", 1),
+    (0, "Welcome to sudfa+! Built entirely in Python with Reflex. 🚀", "", 1),
     (1, "Beautiful morning hike with the family 🌄", "/seed/hike.svg", 3),
     (6, "Reminder: the Analytical Engine might act upon other things besides number. 🤔", "", 5),
     (2, "Proud of the team today. Keep leaning in!", "/seed/team.svg", 9),

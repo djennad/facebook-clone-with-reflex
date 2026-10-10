@@ -2,6 +2,7 @@
 
 import reflex as rx
 
+BRAND = "sudfa+"
 FB_BLUE = "#1877F2"
 PAGE_BG = "#F0F2F5"
 TEXT_MUTED = "#65676B"

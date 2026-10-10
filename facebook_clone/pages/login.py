@@ -2,7 +2,7 @@
 
 import reflex as rx
 
-from ..components.common import FB_BLUE, PAGE_BG, TEXT_MUTED
+from ..components.common import BRAND, FB_BLUE, PAGE_BG, TEXT_MUTED
 from ..state import AuthState
 
 
@@ -74,7 +74,7 @@ def login_page() -> rx.Component:
         rx.flex(
             rx.vstack(
                 rx.heading(
-                    "facebook",
+                    BRAND,
                     size="9",
                     color=FB_BLUE,
                     weight="bold",
@@ -82,7 +82,7 @@ def login_page() -> rx.Component:
                     font_size=["44px", "56px", "60px"],
                 ),
                 rx.text(
-                    "Connect with friends and the world around you on Facebook.",
+                    f"Connect with friends and the world around you on {BRAND}.",
                     size="6",
                     font_size=["20px", "24px", "28px"],
                     line_height="1.3",
