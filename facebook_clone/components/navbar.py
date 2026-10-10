@@ -8,14 +8,29 @@ from .common import BRAND, BRAND_COLOR, TEXT_MUTED, user_avatar
 
 def logo() -> rx.Component:
     return rx.link(
-        rx.image(src="/logo.svg", alt=BRAND, width="40px", height="40px"),
+        rx.image(src="/logo.svg", alt=BRAND, width="40px", height="40px", min_width="40px"),
         href="/",
         underline="none",
+        flex_shrink="0",
     )
 
 
 def search_box() -> rx.Component:
-    return rx.form(
+    # Phones get a button that opens the search page: an inline field would
+    # be too narrow there to tap or type into.
+    mobile_button = rx.link(
+        rx.icon_button(
+            rx.icon("search", size=20),
+            radius="full",
+            variant="soft",
+            color_scheme="gray",
+            size="3",
+            aria_label="Search",
+        ),
+        href="/search",
+        display=["flex", "flex", "none"],
+    )
+    desktop_form = rx.form(
         rx.input(
             rx.input.slot(rx.icon("search", size=16, color=TEXT_MUTED)),
             name="q",
@@ -24,11 +39,13 @@ def search_box() -> rx.Component:
             size="3",
             variant="soft",
             color_scheme="gray",
-            width=["40px", "40px", "240px"],
+            width="240px",
         ),
         on_submit=SearchState.submit_search,
         reset_on_submit=True,
+        display=["none", "none", "block"],
     )
+    return rx.fragment(mobile_button, desktop_form)
 
 
 def nav_tab(icon: str, href: str, route_prefix: str) -> rx.Component:
