@@ -37,13 +37,20 @@ def search_page() -> rx.Component:
         rx.vstack(
             rx.heading("People", size="5"),
             rx.form(
-                rx.input(
-                    rx.input.slot(rx.icon("search", size=16)),
-                    name="q",
-                    default_value=SearchState.query,
-                    key=SearchState.query,
-                    placeholder="Search for people by name or email",
-                    size="3",
+                rx.hstack(
+                    rx.input(
+                        rx.input.slot(rx.icon("search", size=16)),
+                        name="q",
+                        default_value=SearchState.query,
+                        key=SearchState.query,
+                        placeholder="Search for people by name or email",
+                        type="search",
+                        enter_key_hint="search",
+                        auto_focus=True,
+                        size="3",
+                        flex="1",
+                    ),
+                    rx.button("Search", type="submit", size="3"),
                     width="100%",
                 ),
                 on_submit=SearchState.submit_search,
