@@ -1,6 +1,6 @@
 # sudfa+
 
-A Facebook-style social network called **sudfa+**, written entirely in Python with [Reflex](https://reflex.dev) and SQLModel (SQLite by default).
+**sudfa+** is a small social network written entirely in Python with [Reflex](https://reflex.dev) and SQLModel (SQLite by default).
 
 ## Features
 
@@ -9,7 +9,7 @@ A Facebook-style social network called **sudfa+**, written entirely in Python wi
 - **Profiles**: cover photo, avatar, intro (bio, city, join date), a friends grid and the user's posts. You can edit your own profile.
 - **Friends**: send, accept, decline and cancel friend requests, unfriend, and see "People you may know" with mutual-friend counts.
 - **Search**: find people by name or email from the navbar.
-- A responsive layout styled like Facebook.
+- A responsive layout that works on phones.
 
 ## Run it
 
@@ -21,7 +21,7 @@ reflex run
 
 Open http://localhost:3000. On first start the database is created and seeded with demo users.
 
-**Demo login:** `mark@example.com` / `password` (every seeded user has the password `password`).
+**Demo login:** `amina@example.com` / `password` (every seeded user has the password `password`).
 
 To wipe the database and re-seed it:
 

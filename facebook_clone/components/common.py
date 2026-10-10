@@ -3,8 +3,9 @@
 import reflex as rx
 
 BRAND = "sudfa+"
-FB_BLUE = "#1877F2"
-PAGE_BG = "#F0F2F5"
+BRAND_COLOR = "#6E56CF"
+BRAND_SOFT = "#F1EDFE"
+PAGE_BG = "#F5F4F9"
 TEXT_MUTED = "#65676B"
 HOVER_BG = "#F2F2F2"
 
@@ -26,7 +27,7 @@ def user_avatar(src, fallback, size: str = "3") -> rx.Component:
         fallback=fallback,
         radius="full",
         size=size,
-        color_scheme="blue",
+        color_scheme="violet",
         variant="solid",
     )
 
@@ -45,11 +46,11 @@ def sidebar_item(icon: str, label, href: str = "#", **props) -> rx.Component:
     return rx.link(
         rx.hstack(
             rx.center(
-                rx.icon(icon, size=20, color=FB_BLUE),
+                rx.icon(icon, size=20, color=BRAND_COLOR),
                 width="36px",
                 height="36px",
                 border_radius="50%",
-                background="#E7F3FF",
+                background=BRAND_SOFT,
             ),
             rx.text(label, weight="medium", size="2"),
             align="center",

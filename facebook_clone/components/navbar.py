@@ -3,7 +3,7 @@
 import reflex as rx
 
 from ..state import AuthState, SearchState
-from .common import BRAND, FB_BLUE, TEXT_MUTED, user_avatar
+from .common import BRAND, BRAND_COLOR, TEXT_MUTED, user_avatar
 
 
 def logo() -> rx.Component:
@@ -40,10 +40,10 @@ def nav_tab(icon: str, href: str, route_prefix: str) -> rx.Component:
     )
     return rx.link(
         rx.center(
-            rx.icon(icon, size=26, color=rx.cond(is_active, FB_BLUE, TEXT_MUTED)),
+            rx.icon(icon, size=26, color=rx.cond(is_active, BRAND_COLOR, TEXT_MUTED)),
             height="56px",
             width=["64px", "80px", "112px"],
-            border_bottom=rx.cond(is_active, f"3px solid {FB_BLUE}", "3px solid transparent"),
+            border_bottom=rx.cond(is_active, f"3px solid {BRAND_COLOR}", "3px solid transparent"),
             _hover={"background": rx.cond(is_active, "transparent", "#F2F2F2")},
             border_radius=rx.cond(is_active, "0", "8px"),
         ),

@@ -3,7 +3,7 @@
 import reflex as rx
 
 from ..state import AuthState, CommentView, PostsState, PostView
-from .common import CARD_STYLE, FB_BLUE, TEXT_MUTED, card, profile_link, user_avatar
+from .common import CARD_STYLE, BRAND_COLOR, TEXT_MUTED, card, profile_link, user_avatar
 
 UPLOAD_ID = "post_image_upload"
 
@@ -87,7 +87,7 @@ def composer_dialog() -> rx.Component:
                     rx.popover.root(
                         rx.popover.trigger(
                             rx.icon_button(
-                                rx.icon("link", color=FB_BLUE),
+                                rx.icon("link", color=BRAND_COLOR),
                                 variant="ghost",
                                 radius="full",
                                 type="button",
@@ -273,7 +273,7 @@ def post_card(post: PostView) -> rx.Component:
                             width="18px",
                             height="18px",
                             border_radius="50%",
-                            background=FB_BLUE,
+                            background=BRAND_COLOR,
                         ),
                         rx.text(post.like_count, size="2", color=TEXT_MUTED),
                         spacing="1",
@@ -300,11 +300,11 @@ def post_card(post: PostView) -> rx.Component:
                         rx.icon(
                             "thumbs-up",
                             size=18,
-                            fill=rx.cond(post.liked, FB_BLUE, "none"),
+                            fill=rx.cond(post.liked, BRAND_COLOR, "none"),
                         ),
                         "Like",
                         on_click=PostsState.toggle_like(post.id),
-                        color=rx.cond(post.liked, FB_BLUE, TEXT_MUTED),
+                        color=rx.cond(post.liked, BRAND_COLOR, TEXT_MUTED),
                         **action_style,
                     ),
                     rx.button(

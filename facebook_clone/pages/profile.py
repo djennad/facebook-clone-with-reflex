@@ -2,7 +2,7 @@
 
 import reflex as rx
 
-from ..components.common import CARD_STYLE, TEXT_MUTED, card, profile_link, section_title, user_avatar
+from ..components.common import BRAND_COLOR, CARD_STYLE, TEXT_MUTED, card, profile_link, section_title, user_avatar
 from ..components.layout import app_layout
 from ..components.post import composer, post_list
 from ..state import ProfileState, UserCard
@@ -135,7 +135,7 @@ def profile_header() -> rx.Component:
                         radius="full",
                         size="9",
                         variant="solid",
-                        color_scheme="blue",
+                        color_scheme="violet",
                         style={"border": "4px solid white", "width": "168px", "height": "168px"},
                     ),
                     margin_top="-84px",
@@ -229,7 +229,7 @@ def friend_tile(user: UserCard) -> rx.Component:
                 width="100%",
                 border_radius="8px",
                 overflow="hidden",
-                background="#1877F2",
+                background=BRAND_COLOR,
             ),
             rx.text(user.name, size="1", weight="medium", trim="both"),
             spacing="1",
