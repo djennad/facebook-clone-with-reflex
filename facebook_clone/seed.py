@@ -6,6 +6,7 @@ Run `python -m facebook_clone.seed --reset` to wipe and re-seed the database.
 import sys
 from datetime import timedelta
 
+from sqlalchemy.exc import IntegrityError, ProgrammingError
 from sqlmodel import SQLModel, select
 
 from .models import Comment, Friendship, Like, Post, User, create_db, engine, get_session, utcnow
@@ -108,10 +109,14 @@ def seed() -> None:
 
 def init_db() -> None:
     """Create tables and seed demo data if the database is empty."""
-    create_db()
-    with get_session() as session:
-        if session.exec(select(User)).first() is None:
-            seed()
+    try:
+        create_db()
+        with get_session() as session:
+            if session.exec(select(User)).first() is None:
+                seed()
+    except (IntegrityError, ProgrammingError):
+        # Several server workers start at once; another one got here first.
+        pass
 
 
 if __name__ == "__main__":
