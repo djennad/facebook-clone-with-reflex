@@ -3,6 +3,7 @@
 import reflex as rx
 
 from .components.common import BRAND
+from .media import media_api
 from .pages.friends import friends_page
 from .pages.home import home_page
 from .pages.login import login_page
@@ -16,6 +17,7 @@ init_db()
 app = rx.App(
     style={"font_family": "Helvetica, Arial, sans-serif"},
     head_components=[rx.el.link(rel="icon", type="image/svg+xml", href="/logo.svg")],
+    api_transformer=media_api,
 )
 
 app.add_page(home_page, route="/", title=BRAND, on_load=HomeState.load_home)

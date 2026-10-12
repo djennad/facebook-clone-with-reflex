@@ -6,12 +6,12 @@ import hmac
 import re
 import secrets
 from datetime import datetime
-from pathlib import Path
 from urllib.parse import quote
 
 import reflex as rx
 from sqlmodel import Session, col, delete, func, or_, select
 
+from .media import MAX_UPLOAD_BYTES, delete_media, display_url, save_media
 from .models import (
     AuthSession,
     Comment,
@@ -24,7 +24,6 @@ from .models import (
 )
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
 
 
 # ---------------------------------------------------------------------------
@@ -134,7 +133,6 @@ class PostView:
     author_initials: str = ""
     content: str = ""
     image_url: str = ""
-    image_is_upload: bool = False
     time_ago: str = ""
     like_count: int = 0
     liked: bool = False
@@ -194,8 +192,7 @@ def build_post_views(session: Session, posts: list[Post], viewer_id: int) -> lis
                 author_avatar=author.avatar_url,
                 author_initials=initials(author),
                 content=p.content,
-                image_url=p.image_url,
-                image_is_upload=bool(p.image_url) and not p.image_url.startswith(("http", "/")),
+                image_url=display_url(p.image_url),
                 time_ago=time_ago(p.created_at),
                 like_count=len(post_likes),
                 liked=any(lk.user_id == viewer_id for lk in post_likes),
@@ -347,6 +344,10 @@ class PostsState(AuthState):
     def set_new_post_text(self, value: str):
         self.new_post_text = value
 
+    @rx.var
+    def new_post_image_src(self) -> str:
+        return display_url(self.new_post_image)
+
     @rx.event
     def set_new_post_image(self, value: str):
         self.new_post_image = value
@@ -375,15 +376,13 @@ class PostsState(AuthState):
     @rx.event
     async def handle_image_upload(self, files: list[rx.UploadFile]):
         for file in files[:1]:
-            suffix = Path(file.name or "").suffix.lower()
-            if suffix not in ALLOWED_IMAGE_SUFFIXES:
-                return rx.toast.error("Please choose an image file.")
             data = await file.read()
-            name = f"{secrets.token_hex(8)}{suffix}"
-            upload_dir = rx.get_upload_dir()
-            upload_dir.mkdir(parents=True, exist_ok=True)
-            (upload_dir / name).write_bytes(data)
-            self.new_post_image = name
+            if len(data) > MAX_UPLOAD_BYTES:
+                return rx.toast.error("That photo is too large (15 MB max).")
+            try:
+                self.new_post_image = save_media(self.user_id, data)
+            except ValueError:
+                return rx.toast.error("Please choose an image file.")
 
     @rx.event
     def create_post(self):
@@ -447,8 +446,10 @@ class PostsState(AuthState):
                 return
             session.exec(delete(Comment).where(Comment.post_id == post_id))
             session.exec(delete(Like).where(Like.post_id == post_id))
+            image = post.image_url
             session.delete(post)
             session.commit()
+        delete_media(image)
         self._reload_posts()
         return rx.toast("Post deleted")
 
