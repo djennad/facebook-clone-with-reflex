@@ -43,15 +43,7 @@ def composer_dialog() -> rx.Component:
                 rx.cond(
                     PostsState.new_post_image != "",
                     rx.box(
-                        rx.cond(
-                            PostsState.new_post_image.to(str).startswith("http") | PostsState.new_post_image.to(str).startswith("/"),
-                            rx.image(src=PostsState.new_post_image, width="100%", border_radius="8px"),
-                            rx.image(
-                                src=rx.get_upload_url(PostsState.new_post_image),
-                                width="100%",
-                                border_radius="8px",
-                            ),
-                        ),
+                        rx.image(src=PostsState.new_post_image_src, width="100%", border_radius="8px"),
                         rx.icon_button(
                             rx.icon("x", size=16),
                             on_click=PostsState.set_new_post_image(""),
@@ -256,7 +248,7 @@ def post_card(post: PostView) -> rx.Component:
             rx.cond(
                 post.image_url != "",
                 rx.image(
-                    src=rx.cond(post.image_is_upload, rx.get_upload_url(post.image_url), post.image_url),
+                    src=post.image_url,
                     width="100%",
                     max_height="600px",
                     object_fit="cover",

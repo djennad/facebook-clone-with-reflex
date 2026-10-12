@@ -43,7 +43,7 @@ The app reads `RENDER_EXTERNAL_URL`, which Render sets automatically, so the bro
 Notes:
 - Free web services sleep after 15 minutes without traffic, so the next visit takes about a minute to wake up.
 - Render deletes free Postgres databases 30 days after creation unless you upgrade them.
-- Uploaded photos are stored on the service's disk, which is wiped on every deploy or restart. Attach a Render disk at `/app/uploaded_files` (paid plans) to keep them.
+- Uploaded photos are resized (max 1600px) and stored in the database, so they survive restarts and redeploys.
 
 ## Project layout
 

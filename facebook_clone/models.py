@@ -4,6 +4,7 @@ import os
 from datetime import datetime, timezone
 
 import sqlmodel
+from sqlalchemy import Column, LargeBinary
 from sqlmodel import Field, SQLModel, Session, create_engine
 
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///facebook.db")
@@ -96,4 +97,15 @@ class Friendship(SQLModel, table=True):
     requester_id: int = Field(foreign_key="user.id", index=True)
     addressee_id: int = Field(foreign_key="user.id", index=True)
     status: str = "pending"
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class Media(SQLModel, table=True):
+    """An uploaded photo. Kept in the database because the server's disk is
+    wiped whenever the host restarts the app."""
+
+    id: int | None = Field(default=None, primary_key=True)
+    owner_id: int = Field(foreign_key="user.id", index=True)
+    content_type: str
+    data: bytes = Field(sa_column=Column(LargeBinary, nullable=False))
     created_at: datetime = Field(default_factory=utcnow)
